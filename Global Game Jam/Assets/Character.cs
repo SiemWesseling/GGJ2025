@@ -3,6 +3,8 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     private CharacterController characterController;
+    
+    
 
     // Movement
     [SerializeField] private float speed;
