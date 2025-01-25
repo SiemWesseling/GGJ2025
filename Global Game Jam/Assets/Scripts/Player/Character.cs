@@ -2,32 +2,22 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    private CharacterController characterController;
-    
-    
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpForce;
 
-    // Movement
-    [SerializeField] private float speed;
-
-    // Jumping
-    [SerializeField] private float gravity;
-    [SerializeField] private float jumpHeight;
-
-    // Ground Checking
+    [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckDistance;
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float groundCheckRadius;
+    [SerializeField] private LayerMask groundLayer;
 
+    private Rigidbody2D characterRigidBody;
     private bool isGrounded;
-
-    // Velocity
-    private Vector3 velocity;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        characterRigidBody = GetComponent<Rigidbody2D>();
 
         // If groundCheck is not set in inspector, create a child object
         if (groundCheck == null)
@@ -42,30 +32,28 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
+        // Handle horizontal movement
+        float moveInput = Input.GetAxis("Horizontal");
+        characterRigidBody.linearVelocity = new Vector2(moveInput * moveSpeed, characterRigidBody.linearVelocity.y);
 
-        if(isGrounded && velocity.y < 0)
+        // Check if grounded
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        // Handle jump
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = -2f;   // Small value to keep the character grounded
+            characterRigidBody.linearVelocity = new Vector2(characterRigidBody.linearVelocity.x, jumpForce);
         }
+    }
 
-        // Jump logic
-        if(Input.GetButtonDown("Jump") && isGrounded)
+    // Visualize ground check in editor
+    void OnDrawGizmosSelected()
+    {
+        if (groundCheck != null)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
-
-        // Movement logic
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        Vector2 move = transform.right * moveHorizontal + transform.forward * moveVertical;
-        characterController.Move(move * Time.deltaTime * speed);
-
-        // Apply gravity to character
-        velocity.y += gravity * Time.deltaTime;
-
-        // Move the character with gravity
-        characterController.Move(velocity * Time.deltaTime);
     }
 }
+
