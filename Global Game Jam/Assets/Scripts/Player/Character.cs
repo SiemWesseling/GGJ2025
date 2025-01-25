@@ -1,33 +1,29 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    private CharacterController characterController;
-    
-    
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpForce;
 
-    // Movement
-    [SerializeField] private float speed;
-
-    // Jumping
-    [SerializeField] private float gravity;
-    [SerializeField] private float jumpHeight;
-
-    // Ground Checking
+    [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckDistance;
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float groundCheckRadius;
+    [SerializeField] private LayerMask groundLayer;
 
+    private Rigidbody2D playerRigidBody;
     private bool isGrounded;
 
-    // Velocity
-    private Vector3 velocity;
-
+    [Header("Bubble Spawning")]
+    [SerializeField] private GameObject bubbleToSpawn;
+    [SerializeField] private float bubbleGrowthRate;
+    [SerializeField] private float maxBubbleSize;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        playerRigidBody = GetComponent<Rigidbody2D>();
 
         // If groundCheck is not set in inspector, create a child object
         if (groundCheck == null)
@@ -42,30 +38,33 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
+        // Handle horizontal movement
+        float moveInput = Input.GetAxis("Horizontal");
+        playerRigidBody.linearVelocity = new Vector2(moveInput * moveSpeed, playerRigidBody.linearVelocity.y);
 
-        if(isGrounded && velocity.y < 0)
+        // Check if grounded
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        // Handle jump
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = -2f;   // Small value to keep the character grounded
+            playerRigidBody.linearVelocity = new Vector2(playerRigidBody.linearVelocity.x, jumpForce);
         }
 
-        // Jump logic
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        // Spawn new bubble on mouse press, allowing multiple bubbles
+        if (Input.GetMouseButtonDown(0))
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            // Create a new bubble at player position
+            GameObject newBubble = Instantiate(bubbleToSpawn, transform.position, Quaternion.identity);
+            newBubble.transform.localScale = Vector3.zero;
+
+            // Create a new script instance to manage this specific bubble's growth
+            BubbleBehaviour bubbleBehaviour = newBubble.AddComponent<BubbleBehaviour>();
+            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform);
         }
-
-        // Movement logic
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        Vector2 move = transform.right * moveHorizontal + transform.forward * moveVertical;
-        characterController.Move(move * Time.deltaTime * speed);
-
-        // Apply gravity to character
-        velocity.y += gravity * Time.deltaTime;
-
-        // Move the character with gravity
-        characterController.Move(velocity * Time.deltaTime);
     }
 }
+
+
+
+
