@@ -441,12 +441,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7200087221589504930, guid: ba715c21e7944e441b60fb1194b83eda, type: 3}
     - target: {fileID: 3115719756832123416, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: maxBubbleSize
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115719756832123416, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
       propertyPath: objectToSpawn
       value: 
       objectReference: {fileID: 7200087221589504930, guid: ba715c21e7944e441b60fb1194b83eda, type: 3}
+    - target: {fileID: 3115719756832123416, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: bubbleGrowthRate
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8026844477044098042, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569070486032491456, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569070486032491456, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569070486032491456, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9046659529603651499, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
       propertyPath: m_LocalPosition.x

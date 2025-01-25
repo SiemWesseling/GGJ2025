@@ -54,17 +54,13 @@ public class Character : MonoBehaviour
         // Spawn new bubble on mouse press, allowing multiple bubbles
         if (Input.GetMouseButtonDown(0))
         {
-            // Choose spawnposition based on mouse position
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-
-            // Create a new bubble
-            GameObject newBubble = Instantiate(bubbleToSpawn, mousePos, Quaternion.identity);
+            // Create a new bubble at player position
+            GameObject newBubble = Instantiate(bubbleToSpawn, transform.position, Quaternion.identity);
             newBubble.transform.localScale = Vector3.zero;
 
             // Create a new script instance to manage this specific bubble's growth
             BubbleBehaviour bubbleBehaviour = newBubble.AddComponent<BubbleBehaviour>();
-            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize);
+            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform);
         }
     }
 }
