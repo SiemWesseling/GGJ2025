@@ -168,6 +168,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  bubbleToSpawn: {fileID: 7200087221589504930, guid: ba715c21e7944e441b60fb1194b83eda, type: 3}
+  growthRate: 0
+  maxSize: 0
 --- !u!70 &924985689084919628
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

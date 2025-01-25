@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -11,13 +12,18 @@ public class Character : MonoBehaviour
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
 
-    private Rigidbody2D characterRigidBody;
+    private Rigidbody2D playerRigidBody;
     private bool isGrounded;
+
+    [Header("Bubble Spawning")]
+    [SerializeField] private GameObject bubbleToSpawn;
+    [SerializeField] private float bubbleGrowthRate;
+    [SerializeField] private float maxBubbleSize;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        characterRigidBody = GetComponent<Rigidbody2D>();
+        playerRigidBody = GetComponent<Rigidbody2D>();
 
         // If groundCheck is not set in inspector, create a child object
         if (groundCheck == null)
@@ -34,7 +40,7 @@ public class Character : MonoBehaviour
     {
         // Handle horizontal movement
         float moveInput = Input.GetAxis("Horizontal");
-        characterRigidBody.linearVelocity = new Vector2(moveInput * moveSpeed, characterRigidBody.linearVelocity.y);
+        playerRigidBody.linearVelocity = new Vector2(moveInput * moveSpeed, playerRigidBody.linearVelocity.y);
 
         // Check if grounded
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -42,18 +48,27 @@ public class Character : MonoBehaviour
         // Handle jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            characterRigidBody.linearVelocity = new Vector2(characterRigidBody.linearVelocity.x, jumpForce);
+            playerRigidBody.linearVelocity = new Vector2(playerRigidBody.linearVelocity.x, jumpForce);
         }
-    }
 
-    // Visualize ground check in editor
-    void OnDrawGizmosSelected()
-    {
-        if (groundCheck != null)
+        // Spawn new bubble on mouse press, allowing multiple bubbles
+        if (Input.GetMouseButtonDown(0))
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            // Choose spawnposition based on mouse position
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos.z = 0;
+
+            // Create a new bubble
+            GameObject newBubble = Instantiate(bubbleToSpawn, mousePos, Quaternion.identity);
+            newBubble.transform.localScale = Vector3.zero;
+
+            // Create a new script instance to manage this specific bubble's growth
+            BubbleBehaviour bubbleBehaviour = newBubble.AddComponent<BubbleBehaviour>();
+            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize);
         }
     }
 }
+
+
+
 
