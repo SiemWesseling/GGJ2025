@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Character : MonoBehaviour
 {
@@ -21,11 +22,12 @@ public class Character : MonoBehaviour
     [SerializeField] private GameObject bubbleToSpawn;
     [SerializeField] private float bubbleGrowthRate;
     [SerializeField] private float maxBubbleSize;
-    
+
 
     [Header("Bouncing")]
     [SerializeField] private float bounceForce;
-
+    [SerializeField] private float maxForce;
+    [SerializeField] private float upwardBiasStrength;
 
     //TODO: cant blow bubble during jump now
 
@@ -80,7 +82,9 @@ public class Character : MonoBehaviour
         {
             Vector2 incomingVelocity = playerRigidBody.linearVelocity;
             Vector2 reflectedVelocity = Vector2.Reflect(incomingVelocity, collision.contacts[0].normal);
-            playerRigidBody.linearVelocity = reflectedVelocity.normalized * incomingVelocity.magnitude * bounceForce;
+            Vector2 upwardBias = Vector2.up * upwardBiasStrength;
+            Vector2 totalForce = (reflectedVelocity.normalized * bounceForce) + upwardBias;
+            playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
         }
     }
