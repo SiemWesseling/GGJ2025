@@ -78,6 +78,8 @@ public class Character : MonoBehaviour
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        bubbleBehaviour = GetComponent<BubbleBehaviour>();
 
         // If groundCheck is not set in inspector, create a child object
         if (groundCheck == null)
