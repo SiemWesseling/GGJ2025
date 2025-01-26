@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 
 public class Character : MonoBehaviour
@@ -15,14 +16,48 @@ public class Character : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D playerRigidBody;
-    private bool isGrounded;
-    private SpriteRenderer playerSpriteRenderer;
+    
+    private float _moveInput;
+    private float moveInput
+    {
+        get => _moveInput;
+        set
+        {
+            if (value < 0) spriteRenderer.flipX = true;
+            if (value > 0) spriteRenderer.flipX = false;
+            if(value != 0) animator.SetBool("PlayerIsRunning", true);
+            else animator.SetBool("PlayerIsRunning", false);
+            _moveInput = value;
+        }
+    }
+
+    private bool _isGrounded;
+    private bool isGrounded
+    {
+        get => _isGrounded;
+        set
+        {
+            if (isJumping && value)
+            {
+                isJumping = false;
+                animator.SetTrigger("PlayerHasLanded");
+            }
+            _isGrounded = value;
+        }
+    }
+
+    private bool isJumping;
+
 
     [Header("Bubble Spawning")]
     [SerializeField] private GameObject bubbleToSpawn;
     [SerializeField] private float bubbleGrowthRate;
     [SerializeField] private float maxBubbleSize;
 
+    [Header("Animator")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+ 
 
     [Header("Bouncing")]
     [SerializeField] private float bounceForce;
@@ -51,15 +86,20 @@ public class Character : MonoBehaviour
     void Update()
     {
         // Handle horizontal movement
-        float moveInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxis("Horizontal");
         playerRigidBody.linearVelocity = new Vector2(moveInput * moveSpeed, playerRigidBody.linearVelocity.y);
 
         // Check if grounded
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        if (playerRigidBody.linearVelocityY <= 0)
+        {
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        }
 
         // Handle jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            isJumping = true;
+            animator.SetTrigger("PlayerIsJumping");
             playerRigidBody.linearVelocity = new Vector2(playerRigidBody.linearVelocity.x, jumpForce);
         }
 
