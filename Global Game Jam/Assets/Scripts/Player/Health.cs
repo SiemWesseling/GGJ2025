@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
@@ -12,7 +13,7 @@ public class Health : MonoBehaviour
         numOfHearts--;
         if (numOfHearts == 0)
         {
-            //Put here endgame logic
+            SceneManager.LoadSceneAsync(4);
         }
     }
     // Update is called once per frame
