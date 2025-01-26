@@ -313,9 +313,9 @@ MonoBehaviour:
   maxBubbleSize: 2.5
   animator: {fileID: 8263048002315970265}
   spriteRenderer: {fileID: 8569070486032491456}
-  bounceForce: 1.5
-  maxForce: 0
-  upwardBiasStrength: 2.5
+  bounceForce: 5
+  maxForce: 20
+  upwardBiasStrength: 5
   onHit:
     m_PersistentCalls:
       m_Calls:

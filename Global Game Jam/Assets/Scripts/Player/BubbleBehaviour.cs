@@ -10,8 +10,8 @@ public class BubbleBehaviour : MonoBehaviour
     private bool bubbleIsGrowing = false;
 
     // Bubble list variables
-    private List<BubbleBehaviour> activeBubbles = new List<BubbleBehaviour>();
-    [HideInInspector] public int maxBubbles = 1;
+    private static List<BubbleBehaviour> activeBubbles = new List<BubbleBehaviour>();
+    private static int maxBubbles = 5;
 
     // Player position variables
     private Transform playerTransform;
@@ -33,10 +33,12 @@ public class BubbleBehaviour : MonoBehaviour
         {
             BubbleBehaviour oldestBubble = activeBubbles[0];
             activeBubbles.RemoveAt(0);
-            Destroy(oldestBubble.gameObject);
+            if(oldestBubble != null)
+            {
+                Destroy(oldestBubble.gameObject);
+            }
         }
 
-        Debug.Log(activeBubbles.Count);
         // Add current bubble to the list
         activeBubbles.Add(this);
 
@@ -55,7 +57,7 @@ public class BubbleBehaviour : MonoBehaviour
             // Make sure the bubble gets placed on the side of the player which is closest to the mouse location
             Vector3 directionToMouse = (playerTransform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
             Vector3 lookingDirection = Vector3.Dot(directionToMouse, playerTransform.transform.right) < 0 ? playerTransform.transform.right : -playerTransform.transform.right;
-            transform.position = playerTransform.position + lookingDirection * playerSpriteRenderer.bounds.size.x * (Mathf.Sqrt(transform.localScale.magnitude) + 1f);
+            transform.position = playerTransform.position + lookingDirection * (Mathf.Sqrt(transform.localScale.magnitude) + 1f);
         }
 
         // Stop the current bubble from growing and following the player when mouse button is released
@@ -88,6 +90,8 @@ public class BubbleBehaviour : MonoBehaviour
                 // Check if bubble has reached the mouse position
                 if (!reachedTarget)
                 {
+                    CircleCollider2D bubbleCircleCollider = GetComponent<CircleCollider2D>();
+                    bubbleCircleCollider.enabled = false;
                     // Smoothly approach mouse position
                     // I tried putting the 0.1f and the 7.5f in this if statements into changeable variables,
                     // but Unity did not like it. Get back to this if I have the chance
@@ -102,6 +106,10 @@ public class BubbleBehaviour : MonoBehaviour
                     {
                         bubbleRigidbody.linearVelocity = Vector2.zero;
                         reachedTarget = true;
+                        if (reachedTarget)
+                        {
+                            bubbleCircleCollider.enabled = true;
+                        }
                     }
                 }
             }

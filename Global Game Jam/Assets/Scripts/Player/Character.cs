@@ -7,13 +7,19 @@ using UnityEngine.Rendering;
 
 public class Character : MonoBehaviour
 {
-    [Header("Movement Settings")] [SerializeField]
-    private float moveSpeed;
+    [Header("Movement Settings")] 
+    [SerializeField] private float moveSpeed;
 
+    [Header("Jumping Settings")]
     [SerializeField] private float jumpForce;
+    [SerializeField] private float normalGravityScale;
+    [SerializeField] private float increasedGravityScale;
+    private int framesSinceJump = 0;
+    private bool hasJumped = false;
 
-    [Header("Ground Check")] [SerializeField]
-    private Transform groundCheck;
+    [Header("Ground Check")] 
+    [SerializeField] private Transform groundCheck;
+
 
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
@@ -89,6 +95,20 @@ public class Character : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (hasJumped)
+        {
+            framesSinceJump++;
+
+            if (framesSinceJump == 20)
+            {
+                playerRigidBody.gravityScale = increasedGravityScale;
+            }
+        }
+    }
+
+
     void Update()
     {
         // Handles horizontal movement
@@ -115,6 +135,9 @@ public class Character : MonoBehaviour
             isJumping = true;
             animator.SetTrigger("PlayerIsJumping");
             playerRigidBody.linearVelocity = new Vector2(playerRigidBody.linearVelocity.x, jumpForce);
+            hasJumped = true;
+            framesSinceJump = 0;
+            playerRigidBody.gravityScale = normalGravityScale;
         }
 
         // Spawns new bubble on mouse press, allowing multiple bubbles
@@ -142,10 +165,12 @@ public class Character : MonoBehaviour
             playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
         }
-        // if (collision.gameObject.CompareTag("BubbleAmmoIncrease"))
-        // {
-        //
-        // }
+        
+        // TODO: Add ammo
+        if (collision.gameObject.CompareTag("BubbleAmmoIncrease"))
+        {
+            Destroy(collision.gameObject);
+        }
 
     }
 
