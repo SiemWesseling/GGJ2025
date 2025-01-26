@@ -18,4 +18,9 @@ public class buttonHandler : MonoBehaviour
         //animator.SetBool("isplaying", true);
         Application.Quit();
     }
+
+    public void backToMainMenu()
+    {
+        SceneManager.LoadSceneAsync(0);
+    }
 }
