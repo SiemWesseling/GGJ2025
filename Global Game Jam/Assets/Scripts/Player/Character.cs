@@ -71,6 +71,8 @@ public class Character : MonoBehaviour
 
     private GameObject currentRespawnPoint;
 
+    [SerializeField] private UnityEvent onHit;
+
     //TODO: cant blow bubble during jump now, glitches out player controller?
 
     void Start()
@@ -151,7 +153,8 @@ public class Character : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Damage"))
         {
-            this.gameObject.transform.position = currentRespawnPoint.transform.position;
+            onHit.Invoke();
+            gameObject.transform.position = currentRespawnPoint.transform.position;
         }
 
         if (other.gameObject.CompareTag("Respawn"))
