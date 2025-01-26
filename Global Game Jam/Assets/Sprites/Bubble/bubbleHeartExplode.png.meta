@@ -1,0 +1,320 @@
+fileFormatVersion: 2
+guid: 752aeca3f49cdb04881514e386e423c9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5982678065147585906
+    second: bubbleHeartExplode_0
+  - first:
+      213: -4922453524765018444
+    second: bubbleHeartExplode_1
+  - first:
+      213: 5573893489516740653
+    second: bubbleHeartExplode_2
+  - first:
+      213: 4358692868136141811
+    second: bubbleHeartExplode_3
+  - first:
+      213: -7267984976768446638
+    second: bubbleHeartExplode_4
+  - first:
+      213: 7473356781792262184
+    second: bubbleHeartExplode_5
+  - first:
+      213: -7424391050164060883
+    second: bubbleHeartExplode_6
+  - first:
+      213: 1207027793660259154
+    second: bubbleHeartExplode_7
+  - first:
+      213: -2870364493246274790
+    second: bubbleHeartExplode_8
+  - first:
+      213: -9139407872281713190
+    second: bubbleHeartExplode_9
+  - first:
+      213: 9061203975611792270
+    second: bubbleHeartExplode_10
+  - first:
+      213: -6508686531657623119
+    second: bubbleHeartExplode_11
+  - first:
+      213: 2990346336222037462
+    second: bubbleHeartExplode_12
+  - first:
+      213: 1312268821766731543
+    second: bubbleHeartExplode_13
+  - first:
+      213: 2511191277647353582
+    second: bubbleHeartExplode_14
+  - first:
+      213: 2885429663720577003
+    second: bubbleHeartExplode_15
+  - first:
+      213: -1980920593577012609
+    second: bubbleHeartExplode_16
+  - first:
+      213: -318887643975987828
+    second: bubbleHeartExplode_17
+  - first:
+      213: 5324332901452500727
+    second: bubbleHeartExplode_18
+  - first:
+      213: 4983284001860255576
+    second: bubbleHeartExplode_19
+  - first:
+      213: 1132962350928369659
+    second: bubbleHeartExplode_20
+  - first:
+      213: 5118599433712434809
+    second: bubbleHeartExplode_21
+  - first:
+      213: -5887629237682136767
+    second: bubbleHeartExplode_22
+  - first:
+      213: 5762564456669074433
+    second: bubbleHeartExplode_23
+  - first:
+      213: -1797278500419010394
+    second: bubbleHeartExplode_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bubbleHeartExplode_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c1fcbc9ffa79d498c9fcd281ffd53f
+      internalID: -1020572085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubbleHeartExplode_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba6d6331360e1834599269be469182c4
+      internalID: 477106001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubbleHeartExplode_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68dd715788f82bd458d1771ab6c2edb6
+      internalID: -461795484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubbleHeartExplode_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4fa72701f7ffc444914a2a4ba6809f5
+      internalID: -1139428457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bubbleHeartExplode_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f61321b1529c524cbf31714d5c27923
+      internalID: -210868748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 25d04c114d41e7b4185c423f6773d496
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bubbleHeartExplode_0: -1020572085
+      bubbleHeartExplode_1: 477106001
+      bubbleHeartExplode_2: -461795484
+      bubbleHeartExplode_3: -1139428457
+      bubbleHeartExplode_4: -210868748
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
