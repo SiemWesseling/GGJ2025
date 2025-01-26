@@ -35,6 +35,7 @@ public class BubbleBehaviour : MonoBehaviour
         // Make the bubble follow the player
         if (isFollowingPlayer && playerTransform != null)
         {
+            // Make sure the bubble gets placed on the side of the player whichis closest to the mouse location
             Vector3 directionToMouse = (playerTransform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
             Vector3 lookingDirection = Vector3.Dot(directionToMouse, playerTransform.transform.right) < 0 ? playerTransform.transform.right : -playerTransform.transform.right;
             transform.position = playerTransform.position + lookingDirection * playerSpriteRenderer.bounds.size.x * (Mathf.Sqrt(transform.localScale.magnitude) + 0.5f);

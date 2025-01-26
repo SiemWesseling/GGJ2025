@@ -25,8 +25,9 @@ public class Character : MonoBehaviour
 
     [Header("Bouncing")]
     [SerializeField] private float bounceForce;
-    private Vector2 bounceDirection;
 
+
+    //TODO: cant blow bubble during jump now
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -77,9 +78,10 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bubble"))
         {
-            Debug.Log("Je hit de bubble!");
-            bounceDirection = -collision.contacts[0].normal;
-            playerRigidBody.linearVelocity = bounceDirection * bounceForce;
+            Vector2 incomingVelocity = playerRigidBody.linearVelocity;
+            Vector2 reflectedVelocity = Vector2.Reflect(incomingVelocity, collision.contacts[0].normal);
+            playerRigidBody.linearVelocity = reflectedVelocity.normalized * incomingVelocity.magnitude * bounceForce;
+            Destroy(collision.gameObject);
         }
     }
 }

@@ -437,6 +437,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3115719756832123416, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: bounceForce
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115719756832123416, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
       propertyPath: bubbleToSpawn
       value: 
       objectReference: {fileID: 7200087221589504930, guid: ba715c21e7944e441b60fb1194b83eda, type: 3}
@@ -452,6 +456,10 @@ PrefabInstance:
       propertyPath: bubbleGrowthRate
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6617838136965389479, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: bab1deb2cc2cc9e42b477ac85c67d82a, type: 2}
     - target: {fileID: 8026844477044098042, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
       propertyPath: m_Name
       value: Player
