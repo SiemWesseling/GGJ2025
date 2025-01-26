@@ -540,7 +540,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game over
+  m_text: Victory!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 42edede305c5f3d4e84d35aeafaeb116, type: 2}
   m_sharedMaterial: {fileID: 7252479766967539870, guid: 42edede305c5f3d4e84d35aeafaeb116, type: 2}
