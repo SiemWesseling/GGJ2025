@@ -92,25 +92,23 @@ public class BubbleBehaviour : MonoBehaviour
                 if (!reachedTarget)
                 {
                     CircleCollider2D bubbleCircleCollider = GetComponent<CircleCollider2D>();
-                    bubbleCircleCollider.enabled = false;
                     // Smoothly approach mouse position
                     // I tried putting the 0.1f and the 7.5f in this if statements into changeable variables,
                     // but Unity did not like it. Get back to this if I have the chance
-                    if (distanceToLaunchPoint > 0.1f)
+                    print(distanceToLaunchPoint);
+
+                    if (distanceToLaunchPoint > 0.15f)
                     {
                         Vector2 directionToMouse = (launchMousePosition - transform.position).normalized;
                         float remainingDistance = distanceToLaunchPoint;
                         bubbleRigidbody.linearVelocity = directionToMouse * remainingDistance * 7.5f;
                     }
-
-                    if (distanceToLaunchPoint <= 0.1f)
+                    
+                    if (distanceToLaunchPoint <= 0.15f)
                     {
                         bubbleRigidbody.linearVelocity = Vector2.zero;
                         reachedTarget = true;
-                        if (reachedTarget)
-                        {
-                            bubbleCircleCollider.enabled = true;
-                        }
+                        bubbleCircleCollider.enabled = true;
                     }
                 }
             }
