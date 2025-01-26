@@ -70,7 +70,6 @@ public class Character : MonoBehaviour
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
-        playerSpriteRenderer = GetComponent<SpriteRenderer>();
 
         // If groundCheck is not set in inspector, create a child object
         if (groundCheck == null)
@@ -112,7 +111,7 @@ public class Character : MonoBehaviour
 
             // Create a new script instance to manage this specific bubble's growth
             BubbleBehaviour bubbleBehaviour = newBubble.AddComponent<BubbleBehaviour>();
-            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform, playerSpriteRenderer);
+            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform, spriteRenderer);
         }
     }
 
