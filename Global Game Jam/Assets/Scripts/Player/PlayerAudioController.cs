@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerAudioController : MonoBehaviour
 {
-    [SerializeField] private AudioClip jumpSFX, hurtSFX;
+    [SerializeField] private AudioClip jumpSFX, hurtSFX, popSFX;
     [SerializeField] private AudioSource audioSource;
 
     public void PlayJump()
@@ -13,5 +13,10 @@ public class PlayerAudioController : MonoBehaviour
     public void PlayHurt()
     {
         audioSource.PlayOneShot(hurtSFX);
+    }
+
+    public void PlayPop()
+    {
+        audioSource.PlayOneShot(popSFX);
     }
 }
