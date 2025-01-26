@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ public class BubbleBehaviour : MonoBehaviour
     private float bubbleGrowthRate;
     private float maxBubbleSize;
     private bool bubbleIsGrowing = false;
+
+    // Bubble list variables
+    private static List<BubbleBehaviour> activeBubbles = new List<BubbleBehaviour>();
+    private static int maxBubbles = 3;
 
     // Player position variables
     private Transform playerTransform;
@@ -23,6 +28,17 @@ public class BubbleBehaviour : MonoBehaviour
 
     public void Initialize(float rate, float max, Transform playerTransform, SpriteRenderer playerSpriteRenderer)
     {
+        // If max bubbles reached, destroy the oldest bubble
+        if (activeBubbles.Count >= maxBubbles)
+        {
+            BubbleBehaviour oldestBubble = activeBubbles[0];
+            activeBubbles.RemoveAt(0);
+            Destroy(oldestBubble.gameObject);
+        }
+
+        // Add current bubble to the list
+        activeBubbles.Add(this);
+
         this.bubbleGrowthRate = rate;
         this.maxBubbleSize = max;
         this.bubbleIsGrowing = true;
@@ -35,10 +51,10 @@ public class BubbleBehaviour : MonoBehaviour
         // Make the bubble follow the player
         if (isFollowingPlayer && playerTransform != null)
         {
-            // Make sure the bubble gets placed on the side of the player whichis closest to the mouse location
+            // Make sure the bubble gets placed on the side of the player which is closest to the mouse location
             Vector3 directionToMouse = (playerTransform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
             Vector3 lookingDirection = Vector3.Dot(directionToMouse, playerTransform.transform.right) < 0 ? playerTransform.transform.right : -playerTransform.transform.right;
-            transform.position = playerTransform.position + lookingDirection * playerSpriteRenderer.bounds.size.x * (Mathf.Sqrt(transform.localScale.magnitude) + 0.5f);
+            transform.position = playerTransform.position + lookingDirection * playerSpriteRenderer.bounds.size.x * (Mathf.Sqrt(transform.localScale.magnitude) + 1f);
         }
 
         // Stop the current bubble from growing and following the player when mouse button is released
