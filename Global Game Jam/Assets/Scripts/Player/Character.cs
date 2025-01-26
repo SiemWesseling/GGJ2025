@@ -77,7 +77,7 @@ public class Character : MonoBehaviour
 
     private GameObject currentRespawnPoint;
 
-    [SerializeField] private UnityEvent onHit;
+    [SerializeField] private UnityEvent onHit, onJump;
 
     //TODO: cant blow bubble during jump now, glitches out player controller?
 
@@ -133,6 +133,7 @@ public class Character : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             isJumping = true;
+            onJump.Invoke();
             animator.SetTrigger("PlayerIsJumping");
             playerRigidBody.linearVelocity = new Vector2(playerRigidBody.linearVelocity.x, jumpForce);
             hasJumped = true;
