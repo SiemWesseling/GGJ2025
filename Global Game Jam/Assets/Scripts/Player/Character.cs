@@ -80,6 +80,7 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bubble"))
         {
+            // TODO: maak dit minder clunky
             Vector2 incomingVelocity = playerRigidBody.linearVelocity;
             Vector2 reflectedVelocity = Vector2.Reflect(incomingVelocity, collision.contacts[0].normal);
             Vector2 upwardBias = Vector2.up * upwardBiasStrength;
