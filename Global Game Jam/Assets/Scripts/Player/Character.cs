@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public class Character : MonoBehaviour
 {
@@ -46,6 +48,7 @@ public class Character : MonoBehaviour
 
     private bool isJumping;
 
+
     [Header("Bubble Spawning")]
     [SerializeField] private GameObject bubbleToSpawn;
     [SerializeField] private float bubbleGrowthRate;
@@ -55,10 +58,19 @@ public class Character : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
  
+
+    [Header("Bouncing")]
+    [SerializeField] private float bounceForce;
+    [SerializeField] private float maxForce;
+    [SerializeField] private float upwardBiasStrength;
+
+    //TODO: cant blow bubble during jump now, glitches out player controller?
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
 
         // If groundCheck is not set in inspector, create a child object
         if (groundCheck == null)
@@ -100,7 +112,20 @@ public class Character : MonoBehaviour
 
             // Create a new script instance to manage this specific bubble's growth
             BubbleBehaviour bubbleBehaviour = newBubble.AddComponent<BubbleBehaviour>();
-            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform);
+            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform, playerSpriteRenderer);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bubble"))
+        {
+            Vector2 incomingVelocity = playerRigidBody.linearVelocity;
+            Vector2 reflectedVelocity = Vector2.Reflect(incomingVelocity, collision.contacts[0].normal);
+            Vector2 upwardBias = Vector2.up * upwardBiasStrength;
+            Vector2 totalForce = (reflectedVelocity.normalized * bounceForce) + upwardBias;
+            playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
+            Destroy(collision.gameObject);
         }
     }
 }
