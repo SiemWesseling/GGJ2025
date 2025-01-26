@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
@@ -172,6 +173,23 @@ public class Character : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        // load level 2
+        if (collision.gameObject.CompareTag("Winzone1"))
+        {
+            SceneManager.LoadSceneAsync(2);
+        }
+
+        // load level 3
+        if (collision.gameObject.CompareTag("Winzone2"))
+        {
+            SceneManager.LoadSceneAsync(3);
+        }
+
+        // load VictoryScreen
+        if (collision.gameObject.CompareTag("Winzone3"))
+        {
+            SceneManager.LoadSceneAsync(5);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

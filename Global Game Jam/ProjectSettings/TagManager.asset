@@ -7,6 +7,10 @@ TagManager:
   - Bubble
   - Damage
   - Reward
+  - BubbleAmmoIncrease
+  - Winzone1
+  - Winzone2
+  - Winzone3
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - UI
   - Player
   - Damage
-  - 
+  - Win zone
   - 
   - 
   - 
