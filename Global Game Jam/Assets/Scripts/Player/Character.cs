@@ -90,13 +90,17 @@ public class Character : MonoBehaviour
     void Update()
     {
         // Handles horizontal movement
-        float moveInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxis("Horizontal");
         // Handle horizontal movement
         moveInput = Input.GetAxis("Horizontal");
         playerRigidBody.linearVelocity = new Vector2(moveInput * moveSpeed, playerRigidBody.linearVelocity.y);
 
-        // Checks if grounded
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        if (playerRigidBody.linearVelocityY <= 0)
+        {
+            // Checks if grounded
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        }
+
         // Check if grounded
         if (playerRigidBody.linearVelocityY <= 0)
         {
@@ -136,10 +140,10 @@ public class Character : MonoBehaviour
             playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.CompareTag("BubbleAmmoIncrease"))
-        {
-
-        }
+        // if (collision.gameObject.CompareTag("BubbleAmmoIncrease"))
+        // {
+        //
+        // }
 
     }
 
@@ -147,7 +151,6 @@ public class Character : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Damage"))
         {
-            print("Hello");
             this.gameObject.transform.position = currentRespawnPoint.transform.position;
         }
 
