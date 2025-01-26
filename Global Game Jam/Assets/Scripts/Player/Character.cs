@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -64,6 +65,8 @@ public class Character : MonoBehaviour
     [SerializeField] private float maxForce;
     [SerializeField] private float upwardBiasStrength;
 
+    private GameObject currentRespawnPoint;
+
     //TODO: cant blow bubble during jump now, glitches out player controller?
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -125,6 +128,21 @@ public class Character : MonoBehaviour
             Vector2 totalForce = (reflectedVelocity.normalized * bounceForce) + upwardBias;
             playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
+        }
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Damage"))
+        {
+            print("Hello");
+            this.gameObject.transform.position = currentRespawnPoint.transform.position;
+        }
+
+        if (other.gameObject.CompareTag("Respawn"))
+        {
+            currentRespawnPoint = other.gameObject;
         }
     }
 }
