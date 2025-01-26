@@ -100,7 +100,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -309,7 +309,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   bubbleToSpawn: {fileID: 7200087221589504930, guid: ba715c21e7944e441b60fb1194b83eda, type: 3}
-  bubbleGrowthRate: 0.5
+  bubbleGrowthRate: 5
   maxBubbleSize: 2.5
   animator: {fileID: 8263048002315970265}
   spriteRenderer: {fileID: 8569070486032491456}
