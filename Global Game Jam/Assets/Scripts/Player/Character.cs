@@ -7,18 +7,21 @@ using UnityEngine.Rendering;
 
 public class Character : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed;
+    [Header("Movement Settings")] [SerializeField]
+    private float moveSpeed;
+
     [SerializeField] private float jumpForce;
 
-    [Header("Ground Check")]
-    [SerializeField] private Transform groundCheck;
+    [Header("Ground Check")] [SerializeField]
+    private Transform groundCheck;
+
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D playerRigidBody;
-    
+
     private float _moveInput;
+
     private float moveInput
     {
         get => _moveInput;
@@ -26,13 +29,14 @@ public class Character : MonoBehaviour
         {
             if (value < 0) spriteRenderer.flipX = true;
             if (value > 0) spriteRenderer.flipX = false;
-            if(value != 0) animator.SetBool("PlayerIsRunning", true);
+            if (value != 0) animator.SetBool("PlayerIsRunning", true);
             else animator.SetBool("PlayerIsRunning", false);
             _moveInput = value;
         }
     }
 
     private bool _isGrounded;
+
     private bool isGrounded
     {
         get => _isGrounded;
@@ -43,6 +47,7 @@ public class Character : MonoBehaviour
                 isJumping = false;
                 animator.SetTrigger("PlayerHasLanded");
             }
+
             _isGrounded = value;
         }
     }
@@ -50,18 +55,17 @@ public class Character : MonoBehaviour
     private bool isJumping;
 
 
-    [Header("Bubble Spawning")]
-    [SerializeField] private GameObject bubbleToSpawn;
+    [Header("Bubble Spawning")] [SerializeField]
+    private GameObject bubbleToSpawn;
+
     [SerializeField] private float bubbleGrowthRate;
     [SerializeField] private float maxBubbleSize;
 
-    [Header("Animator")]
-    [SerializeField] private Animator animator;
+    [Header("Animator")] [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
- 
 
-    [Header("Bouncing")]
-    [SerializeField] private float bounceForce;
+
+    [Header("Bouncing")] [SerializeField] private float bounceForce;
     [SerializeField] private float maxForce;
     [SerializeField] private float upwardBiasStrength;
 
@@ -69,7 +73,6 @@ public class Character : MonoBehaviour
 
     //TODO: cant blow bubble during jump now, glitches out player controller?
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
@@ -84,20 +87,23 @@ public class Character : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Handles horizontal movement
+        float moveInput = Input.GetAxis("Horizontal");
         // Handle horizontal movement
         moveInput = Input.GetAxis("Horizontal");
         playerRigidBody.linearVelocity = new Vector2(moveInput * moveSpeed, playerRigidBody.linearVelocity.y);
 
+        // Checks if grounded
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         // Check if grounded
         if (playerRigidBody.linearVelocityY <= 0)
         {
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         }
 
-        // Handle jump
+        // Handles jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             isJumping = true;
@@ -105,14 +111,14 @@ public class Character : MonoBehaviour
             playerRigidBody.linearVelocity = new Vector2(playerRigidBody.linearVelocity.x, jumpForce);
         }
 
-        // Spawn new bubble on mouse press, allowing multiple bubbles
+        // Spawns new bubble on mouse press, allowing multiple bubbles
         if (Input.GetMouseButtonDown(0))
         {
-            // Create a new bubble at player position
+            // Creates a new bubble at player position
             GameObject newBubble = Instantiate(bubbleToSpawn, transform.position, Quaternion.identity);
             newBubble.transform.localScale = Vector3.zero;
 
-            // Create a new script instance to manage this specific bubble's growth
+            // Creates a new script instance to manage this specific bubble's growth
             BubbleBehaviour bubbleBehaviour = newBubble.AddComponent<BubbleBehaviour>();
             bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform, spriteRenderer);
         }
@@ -122,6 +128,7 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bubble"))
         {
+            // TODO: maak dit minder clunky
             Vector2 incomingVelocity = playerRigidBody.linearVelocity;
             Vector2 reflectedVelocity = Vector2.Reflect(incomingVelocity, collision.contacts[0].normal);
             Vector2 upwardBias = Vector2.up * upwardBiasStrength;
@@ -129,7 +136,11 @@ public class Character : MonoBehaviour
             playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
         }
-        
+        if (collision.gameObject.CompareTag("BubbleAmmoIncrease"))
+        {
+
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

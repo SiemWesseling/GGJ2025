@@ -182,9 +182,10 @@ GameObject:
   - component: {fileID: 3115719756832123416}
   - component: {fileID: 924985689084919628}
   - component: {fileID: 8263048002315970265}
+  - component: {fileID: 2187846735466148838}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,9 +313,9 @@ MonoBehaviour:
   maxBubbleSize: 2.5
   animator: {fileID: 8263048002315970265}
   spriteRenderer: {fileID: 8569070486032491456}
-  bounceForce: 0
+  bounceForce: 1.5
   maxForce: 0
-  upwardBiasStrength: 0
+  upwardBiasStrength: 2.5
 --- !u!70 &924985689084919628
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -374,3 +375,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2187846735466148838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026844477044098042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d5138f8451e85489648594850baee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numOfHearts: 3
+  hearts: []
