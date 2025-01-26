@@ -11,7 +11,7 @@ public class BubbleBehaviour : MonoBehaviour
 
     // Bubble list variables
     private List<BubbleBehaviour> activeBubbles = new List<BubbleBehaviour>();
-    private int maxBubbles = 1;
+    [HideInInspector] public int maxBubbles = 3;
 
     // Player position variables
     private Transform playerTransform;
@@ -31,6 +31,8 @@ public class BubbleBehaviour : MonoBehaviour
         // If max bubbles reached, destroy the oldest bubble
         if (activeBubbles.Count >= maxBubbles)
         {
+            Debug.Log(activeBubbles.Count);
+            Debug.Log(maxBubbles);
             BubbleBehaviour oldestBubble = activeBubbles[0];
             activeBubbles.RemoveAt(0);
             Destroy(oldestBubble.gameObject);

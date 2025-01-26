@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
     private Rigidbody2D playerRigidBody;
     private bool isGrounded;
     private SpriteRenderer playerSpriteRenderer;
+    private BubbleBehaviour bubbleBehaviour;
 
     [Header("Bubble Spawning")]
     [SerializeField] private GameObject bubbleToSpawn;
@@ -35,6 +36,7 @@ public class Character : MonoBehaviour
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        bubbleBehaviour = GetComponent<BubbleBehaviour>();
 
         // If groundCheck is not set in inspector, create a child object
         if (groundCheck == null)
@@ -87,9 +89,11 @@ public class Character : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        // TODO: on collision with object increase the bubble array amount with 1
         if (collision.gameObject.CompareTag("BubbleAmmoIncrease"))
         {
-
+            //bubbleBehaviour.maxBubbles += 1;
+            Destroy(collision.gameObject);
         }
     }
 }
