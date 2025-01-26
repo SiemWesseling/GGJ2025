@@ -64,6 +64,8 @@ public class Character : MonoBehaviour
     [Header("Bubble Spawning")] [SerializeField]
     private GameObject bubbleToSpawn;
 
+    [SerializeField] private AudioSource audioSource;
+
     [SerializeField] private float bubbleGrowthRate;
     [SerializeField] private float maxBubbleSize;
 
@@ -77,7 +79,7 @@ public class Character : MonoBehaviour
 
     private GameObject currentRespawnPoint;
 
-    [SerializeField] private UnityEvent onHit, onJump;
+    [SerializeField] private UnityEvent onHit, onJump, onBubble;
 
     //TODO: cant blow bubble during jump now, glitches out player controller?
 
@@ -107,8 +109,7 @@ public class Character : MonoBehaviour
             }
         }
     }
-
-
+    
     void Update()
     {
         // Handles horizontal movement
@@ -150,7 +151,7 @@ public class Character : MonoBehaviour
 
             // Creates a new script instance to manage this specific bubble's growth
             BubbleBehaviour bubbleBehaviour = newBubble.AddComponent<BubbleBehaviour>();
-            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform, spriteRenderer);
+            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform);
         }
     }
 
@@ -159,6 +160,7 @@ public class Character : MonoBehaviour
         if (collision.gameObject.CompareTag("Bubble"))
         {
             // TODO: maak dit minder clunky
+            onBubble.Invoke();
             Vector2 incomingVelocity = playerRigidBody.linearVelocity;
             Vector2 reflectedVelocity = Vector2.Reflect(incomingVelocity, collision.contacts[0].normal);
             Vector2 upwardBias = Vector2.up * upwardBiasStrength;
@@ -166,7 +168,6 @@ public class Character : MonoBehaviour
             playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)

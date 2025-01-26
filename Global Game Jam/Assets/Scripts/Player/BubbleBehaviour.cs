@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BubbleBehaviour : MonoBehaviour
 {
@@ -22,11 +24,11 @@ public class BubbleBehaviour : MonoBehaviour
     private bool reachedTarget = false;
 
     [SerializeField] private float launchSpeed;
+    
+    [SerializeField] private UnityEvent onDeath;
 
-    SpriteRenderer playerSpriteRenderer;
 
-
-    public void Initialize(float rate, float max, Transform playerTransform, SpriteRenderer playerSpriteRenderer)
+    public void Initialize(float rate, float max, Transform playerTransform)
     {
         // If max bubbles reached, destroy the oldest bubble
         if (activeBubbles.Count >= maxBubbles)
@@ -46,7 +48,6 @@ public class BubbleBehaviour : MonoBehaviour
         this.maxBubbleSize = max;
         this.bubbleIsGrowing = true;
         this.playerTransform = playerTransform;
-        this.playerSpriteRenderer = playerSpriteRenderer;
     }
 
     void Update()
