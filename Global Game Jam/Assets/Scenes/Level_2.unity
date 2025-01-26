@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 461704798}
   m_Layer: 0
   m_Name: Win Zone
-  m_TagString: Reward
+  m_TagString: Winzone2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

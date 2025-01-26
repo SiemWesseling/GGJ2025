@@ -2341,8 +2341,8 @@ GameObject:
   - component: {fileID: 1295787302}
   - component: {fileID: 1295787301}
   m_Layer: 0
-  m_Name: little-bear-idle_0
-  m_TagString: Reward
+  m_Name: Win Zone
+  m_TagString: Winzone3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
