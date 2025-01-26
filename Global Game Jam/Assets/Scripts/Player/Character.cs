@@ -166,12 +166,6 @@ public class Character : MonoBehaviour
             playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
         }
-        
-        // TODO: Add ammo
-        if (collision.gameObject.CompareTag("BubbleAmmoIncrease"))
-        {
-            Destroy(collision.gameObject);
-        }
 
     }
 

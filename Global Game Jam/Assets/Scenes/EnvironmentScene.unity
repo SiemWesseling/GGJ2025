@@ -404,8 +404,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3115719756832123416, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: normalGravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115719756832123416, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
       propertyPath: upwardBiasStrength
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115719756832123416, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: increasedGravityScale
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3115719756832123416, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
       propertyPath: onHit.m_PersistentCalls.m_Calls.Array.size

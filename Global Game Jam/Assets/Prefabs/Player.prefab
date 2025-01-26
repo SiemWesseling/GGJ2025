@@ -303,6 +303,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpForce: 5
+  normalGravityScale: 1
+  increasedGravityScale: 2
   groundCheck: {fileID: 7252923616356458462}
   groundCheckRadius: 0.1
   groundLayer:
@@ -331,6 +333,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onJump:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!70 &924985689084919628
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
