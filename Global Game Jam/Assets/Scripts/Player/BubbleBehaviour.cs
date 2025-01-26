@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BubbleBehaviour : MonoBehaviour
@@ -17,12 +18,16 @@ public class BubbleBehaviour : MonoBehaviour
 
     [SerializeField] private float launchSpeed;
 
-    public void Initialize(float rate, float max, Transform playerTransform)
+    SpriteRenderer playerSpriteRenderer;
+
+
+    public void Initialize(float rate, float max, Transform playerTransform, SpriteRenderer playerSpriteRenderer)
     {
         this.bubbleGrowthRate = rate;
         this.maxBubbleSize = max;
         this.bubbleIsGrowing = true;
         this.playerTransform = playerTransform;
+        this.playerSpriteRenderer = playerSpriteRenderer;
     }
 
     void Update()
@@ -30,16 +35,18 @@ public class BubbleBehaviour : MonoBehaviour
         // Make the bubble follow the player
         if (isFollowingPlayer && playerTransform != null)
         {
-            transform.position = playerTransform.position;
+            Vector3 directionToMouse = (playerTransform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
+            Vector3 lookingDirection = Vector3.Dot(directionToMouse, playerTransform.transform.right) < 0 ? playerTransform.transform.right : -playerTransform.transform.right;
+            transform.position = playerTransform.position + lookingDirection * playerSpriteRenderer.bounds.size.x * (Mathf.Sqrt(transform.localScale.magnitude) + 0.5f);
         }
-
-        // Get the current mousePosition to shoot the bubble towards
-        launchMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        launchMousePosition.z = 0;
 
         // Stop the current bubble from growing and following the player when mouse button is released
         if (isFollowingPlayer && Input.GetMouseButtonUp(0))
         {
+            // Get the current mousePosition to shoot the bubble towards
+            launchMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            launchMousePosition.z = 0;
+
             bubbleIsGrowing = false;
             isFollowingPlayer = false;
             reachedTarget = false;
@@ -52,8 +59,7 @@ public class BubbleBehaviour : MonoBehaviour
                 bubbleRigidbody.AddForce(launchDirection * launchSpeed, ForceMode2D.Impulse);
             }
         }
-
-
+        
         if (!isFollowingPlayer)
         {
             Rigidbody2D bubbleRigidbody = GetComponent<Rigidbody2D>();

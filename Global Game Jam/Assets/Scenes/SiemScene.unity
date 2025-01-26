@@ -456,6 +456,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8026844477044098042, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8569070486032491456, guid: 74aed8d80f8fce94bb216be7a28cfc64, type: 3}
       propertyPath: m_Color.b
       value: 0

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -14,16 +15,24 @@ public class Character : MonoBehaviour
 
     private Rigidbody2D playerRigidBody;
     private bool isGrounded;
+    private SpriteRenderer playerSpriteRenderer;
 
     [Header("Bubble Spawning")]
     [SerializeField] private GameObject bubbleToSpawn;
     [SerializeField] private float bubbleGrowthRate;
     [SerializeField] private float maxBubbleSize;
+    
+
+    [Header("Bouncing")]
+    [SerializeField] private float bounceForce;
+    private Vector2 bounceDirection;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
 
         // If groundCheck is not set in inspector, create a child object
         if (groundCheck == null)
@@ -60,7 +69,17 @@ public class Character : MonoBehaviour
 
             // Create a new script instance to manage this specific bubble's growth
             BubbleBehaviour bubbleBehaviour = newBubble.AddComponent<BubbleBehaviour>();
-            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform);
+            bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform, playerSpriteRenderer);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bubble"))
+        {
+            Debug.Log("Je hit de bubble!");
+            bounceDirection = -collision.contacts[0].normal;
+            playerRigidBody.linearVelocity = bounceDirection * bounceForce;
         }
     }
 }
