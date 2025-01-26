@@ -29,7 +29,7 @@ public class Character : MonoBehaviour
     [SerializeField] private float maxForce;
     [SerializeField] private float upwardBiasStrength;
 
-    //TODO: cant blow bubble during jump now
+    //TODO: cant blow bubble during jump now, glitches out player controller?
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
