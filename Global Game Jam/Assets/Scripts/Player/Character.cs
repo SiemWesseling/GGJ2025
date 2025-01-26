@@ -31,7 +31,6 @@ public class Character : MonoBehaviour
 
     //TODO: cant blow bubble during jump now, glitches out player controller?
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
@@ -47,30 +46,29 @@ public class Character : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Handle horizontal movement
+        // Handles horizontal movement
         float moveInput = Input.GetAxis("Horizontal");
         playerRigidBody.linearVelocity = new Vector2(moveInput * moveSpeed, playerRigidBody.linearVelocity.y);
 
-        // Check if grounded
+        // Checks if grounded
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // Handle jump
+        // Handles jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             playerRigidBody.linearVelocity = new Vector2(playerRigidBody.linearVelocity.x, jumpForce);
         }
 
-        // Spawn new bubble on mouse press, allowing multiple bubbles
+        // Spawns new bubble on mouse press, allowing multiple bubbles
         if (Input.GetMouseButtonDown(0))
         {
-            // Create a new bubble at player position
+            // Creates a new bubble at player position
             GameObject newBubble = Instantiate(bubbleToSpawn, transform.position, Quaternion.identity);
             newBubble.transform.localScale = Vector3.zero;
 
-            // Create a new script instance to manage this specific bubble's growth
+            // Creates a new script instance to manage this specific bubble's growth
             BubbleBehaviour bubbleBehaviour = newBubble.AddComponent<BubbleBehaviour>();
             bubbleBehaviour.Initialize(bubbleGrowthRate, maxBubbleSize, transform, playerSpriteRenderer);
         }
@@ -87,6 +85,11 @@ public class Character : MonoBehaviour
             Vector2 totalForce = (reflectedVelocity.normalized * bounceForce) + upwardBias;
             playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("BubbleAmmoIncrease"))
+        {
+
         }
     }
 }

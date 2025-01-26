@@ -10,8 +10,8 @@ public class BubbleBehaviour : MonoBehaviour
     private bool bubbleIsGrowing = false;
 
     // Bubble list variables
-    private static List<BubbleBehaviour> activeBubbles = new List<BubbleBehaviour>();
-    private static int maxBubbles = 3;
+    private List<BubbleBehaviour> activeBubbles = new List<BubbleBehaviour>();
+    private int maxBubbles = 1;
 
     // Player position variables
     private Transform playerTransform;
