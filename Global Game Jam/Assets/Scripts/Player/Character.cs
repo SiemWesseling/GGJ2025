@@ -107,8 +107,7 @@ public class Character : MonoBehaviour
             }
         }
     }
-
-
+    
     void Update()
     {
         // Handles horizontal movement
@@ -166,7 +165,6 @@ public class Character : MonoBehaviour
             playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
