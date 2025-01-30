@@ -169,29 +169,10 @@ public class Character : MonoBehaviour
             playerRigidBody.linearVelocity = Vector2.ClampMagnitude(totalForce, maxForce);
             Destroy(collision.gameObject);
         }
-        
         // TODO: Add ammo
         if (collision.gameObject.CompareTag("BubbleAmmoIncrease"))
         {
             Destroy(collision.gameObject);
-        }
-
-        // load level 2
-        if (collision.gameObject.CompareTag("Winzone1"))
-        {
-            SceneManager.LoadSceneAsync(2);
-        }
-
-        // load level 3
-        if (collision.gameObject.CompareTag("Winzone2"))
-        {
-            SceneManager.LoadSceneAsync(3);
-        }
-
-        // load VictoryScreen
-        if (collision.gameObject.CompareTag("Winzone3"))
-        {
-            SceneManager.LoadSceneAsync(5);
         }
     }
 
@@ -206,6 +187,24 @@ public class Character : MonoBehaviour
         if (other.gameObject.CompareTag("Respawn"))
         {
             currentRespawnPoint = other.gameObject;
+        }
+
+        // load level 2
+        if (other.gameObject.CompareTag("Winzone1"))
+        {
+            SceneManager.LoadSceneAsync(2);
+        }
+
+        // load level 3
+        if (other.gameObject.CompareTag("Winzone2"))
+        {
+            SceneManager.LoadSceneAsync(3);
+        }
+
+        // load VictoryScreen
+        if (other.gameObject.CompareTag("Winzone3"))
+        {
+            SceneManager.LoadSceneAsync(5);
         }
     }
 }
